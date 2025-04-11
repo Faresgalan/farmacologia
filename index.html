@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuestionarios Farmacología</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    .fixed-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      padding: 10px 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    #puntaje {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .progress-container {
+  background: none;
+  height: auto;
+  border-radius: 0;
+  overflow: visible;
+}
+#progreso {
+  width: auto;
+  background: none;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+  line-height: normal;
+  font-size: 16px;
+}
+    .content {
+      padding: 100px 20px 20px;
+    }
+    .question-container {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #eee;
+      cursor: pointer;
+    }
+    button:hover { background: #ddd; }
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="fixed-bar">
+    <div id="puntaje">Puntaje: 0</div>
+    <div class="progress-container">
+      <div id="progreso"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Cuestionarios Farmacología</h1>
+    <div id="temas">
+      <button onclick="mostrarSeccion('agonistas')">Agonistas Adrenérgicos</button>
+      <button onclick="mostrarSeccion('antagonistas')">Antagonistas Adrenérgicos</button>
+      <button onclick="mostrarSeccion('opioides1')">Opioides Parte 1</button>
+      <button onclick="mostrarSeccion('opioides2')">Opioides Parte 2</button>
+      <button onclick="mostrarSeccion('antidepresivos')">Antidepresivos</button>
+      <button onclick="mostrarSeccion('antipsicoticos')">Antipsicóticos</button>
+      <button onclick="mostrarSeccion('anestesiaG')">Anestésicos Generales</button>
+      <button onclick="mostrarSeccion('anestesiaL')">Anestésicos Locales</button>
+      <button onclick="mostrarSeccion('antiepilepticos')">Antiepilépticos</button>
+      <button onclick="mostrarSeccion('etanol')">Etanol</button>
+    </div>
+
+    <!-- Contenedores de preguntas por tema -->
+    <div id="agonistas" class="quiz-section" style="display:none;"></div>
+    <div id="antagonistas" class="quiz-section" style="display:none;"></div>
+    <div id="opioides1" class="quiz-section" style="display:none;"></div>
+    <div id="opioides2" class="quiz-section" style="display:none;"></div>
+    <div id="antidepresivos" class="quiz-section" style="display:none;"></div>
+    <div id="antipsicoticos" class="quiz-section" style="display:none;"></div>
+    <div id="anestesiaG" class="quiz-section" style="display:none;"></div>
+    <div id="anestesiaL" class="quiz-section" style="display:none;"></div>
+    <div id="antiepilepticos" class="quiz-section" style="display:none;"></div>
+    <div id="etanol" class="quiz-section" style="display:none;"></div>
+  </div>
+
+  <script>
+    const preguntasAgonistas = [
+    {
+    pregunta: "Las catecolaminas y los fármacos simpaticomiméticos se clasifican como:",
+    opciones: [
+      "Antagonistas muscarínicos",
+      "Simpaticomiméticos de acción directa, indirecta o mixta",
+      "Inhibidores de colinesterasa",
+      "Bloqueadores beta"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cómo aumentan los fármacos de acción indirecta la disponibilidad de norepinefrina (NE)?",
+    opciones: [
+      "Por inhibición de su síntesis",
+      "Al bloquear receptores adrenérgicos",
+      "Al liberar NE, inhibir su recaptura o su metabolismo",
+      "Por acción colinérgica indirecta"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Clasificación de simpaticomiméticos – ver figura 12-1 en el libro.",
+    opciones: [
+      "Revisar la tabla por cuenta propia",
+      "No aplica",
+      "No aplica",
+      "No aplica"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Acciones en sistemas de órganos de la epinefrina – consultar cuadro clínico.",
+    opciones: [
+      "Revisar el cuadro por cuenta propia",
+      "No aplica",
+      "No aplica",
+      "No aplica"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cuál de las siguientes presentaciones y usos corresponde a la epinefrina?",
+    opciones: [
+      "Supositorios rectales para migraña",
+      "Solución inyectable IM/IV/SC; usada para anafilaxia, paro cardíaco y asma grave",
+      "Jarabe oral para fiebre",
+      "Parche transdérmico para arritmias"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Qué efecto produce la norepinefrina en el riñón?",
+    opciones: [
+      "Vasodilatación renal",
+      "Aumento del flujo glomerular",
+      "Disminución del flujo renal por vasoconstricción",
+      "Estimulación de la diuresis"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuál es la vía de administración de norepinefrina en el contexto clínico habitual?",
+    opciones: [
+      "Oral",
+      "Subcutánea",
+      "Infusión intravenosa continua",
+      "Intramuscular"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Qué efecto tiene la dopamina a dosis bajas?",
+    opciones: [
+      "Vasoconstricción periférica intensa",
+      "Aumento de contractilidad cardíaca",
+      "Vasodilatación renal y esplácnica",
+      "Broncoconstricción severa"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Qué efecto cardiovascular presenta el isoproterenol?",
+    opciones: [
+      "Reduce presión diastólica y resistencia vascular periférica",
+      "Aumenta presión sistólica y reduce frecuencia cardíaca",
+      "Disminuye el gasto cardíaco",
+      "Aumenta la presión arterial media"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Qué efecto tiene la dobutamina en el sistema cardiovascular?",
+    opciones: [
+      "Disminuye contractilidad cardíaca",
+      "Broncoconstricción y vasodilatación periférica",
+      "Inotropismo positivo y aumento del gasto cardíaco",
+      "Vasodilatación renal"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuál es la acción principal del albuterol y su forma de presentación?",
+    opciones: [
+      "Antihipertensivo oral",
+      "Broncodilatador en asma y parto prematuro; en tabletas y jarabe",
+      "Vasodilatador coronario en aerosol nasal",
+      "Estimulante del SNC en parche dérmico"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son agonistas β2 de acción prolongada?",
+    opciones: [
+      "Brimonidina, Terbutalina y Dobutamina",
+      "Salmeterol, Formoterol y Arformoterol",
+      "Norepinefrina, Dopamina y Efedrina",
+      "Isoproterenol, Adrenalina y Albuterol"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuál es un efecto adverso común de agonistas β2 de acción prolongada?",
+    opciones: [
+      "Hipotermia",
+      "Bradicardia y sedación",
+      "Temblores, taquicardia, hiperglucemia e hipocalemia",
+      "Disminución de la glucosa y contractilidad"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuál es el mecanismo de acción de la clonidina?",
+    opciones: [
+      "Antagonista α1 adrenérgico",
+      "Agonista α2 que reduce salida simpática del SNC",
+      "Inhibidor de la recaptura de serotonina",
+      "Agonista dopaminérgico D1"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuál es un efecto central de las anfetaminas?",
+    opciones: [
+      "Sedación profunda",
+      "Estimulación del sistema límbico y sueño profundo",
+      "Aumento del estado de alerta y euforia",
+      "Depresión del centro respiratorio"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuál es un uso terapéutico aprobado de las anfetaminas?",
+    opciones: [
+      "Enfermedad de Addison",
+      "TDAH y narcolepsia",
+      "Hipotiroidismo",
+      "Psicosis refractaria"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Usos terapéuticos de fármacos simpaticomiméticos – consultar tabla resumen.",
+    opciones: [
+      "Revisar el cuadro por cuenta propia",
+      "No aplica",
+      "No aplica",
+      "No aplica"
+    ],
+    respuesta: 0
+  }
+];
+    const preguntasAntagonistas = [{
+    pregunta: "Describa las propiedades farmacológicas de los antagonistas adrenérgicos alfa 1:",
+    opciones: [
+      "Aumento de la presión arterial y contracción del músculo detrusor",
+      "Vasodilatación arterial, reducción de la presión arterial y relajación del cuello vesical",
+      "Bradicardia, aumento de la resistencia vascular y retención urinaria",
+      "Estimulación simpática central y aumento del gasto cardíaco"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Clasificación de los antagonistas de receptores adrenérgicos – ver figura 12-3.",
+    opciones: [
+      "Revisar la tabla por cuenta propia",
+      "No aplica",
+      "No aplica",
+      "No aplica"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Escriba las características más importantes de la prazosina, terazocina y doxazosina:",
+    opciones: [
+      "Prazosina tiene baja biodisponibilidad y corta duración; terazocina se utiliza solo para angina; doxazosina es útil para hipertensión severa.",
+      "Prazosina no causa taquicardia refleja; terazocina tiene acción prolongada y efecto sobre la próstata; doxazosina útil en HPB pero no recomendada para hipertensión.",
+      "Todos son beta bloqueadores de acción central utilizados en arritmias.",
+      "Prazosina tiene efectos dopaminérgicos; terazocina causa sedación intensa; doxazosina inhibe receptores D2."
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los efectos adversos más importantes de los antagonistas adrenérgicos alfa 1 y sus usos terapéuticos:",
+    opciones: [
+      "Bradicardia, somnolencia y uso en asma.",
+      "Hipotensión postural, síncope, cefalea y uso en HPB e hipertensión.",
+      "Hipertensión, hiperactividad simpática y uso en epilepsia.",
+      "Cefalea, aumento de lípidos y uso en migraña."
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba las características de los antagonistas alfa 2 y los no selectivos de receptores alfa (incluidos efectos terapéuticos):",
+    opciones: [
+      "Yohimbina bloquea α1 y disminuye presión; fenoxibenzamina activa α2 y aumenta NE.",
+      "Yohimbina bloquea α2, aumentando tono simpático y PA; fenoxibenzamina y fentolamina son no selectivos y útiles en feocromocitoma.",
+      "Yohimbina estimula α2; fenoxibenzamina solo actúa en SNC.",
+      "Fentolamina y fenoxibenzamina bloquean β2 y se usan en hipertensión esencial."
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los efectos más importantes de los antagonistas adicionales de los receptores adrenérgicos alfa:",
+    opciones: [
+      "Indoramina causa hipertensión severa y convulsiones.",
+      "Urapidilo bloquea α1 y produce hipertensión; bunazosina bloquea β1.",
+      "Clorpromazina bloquea receptores D2 y α; ketanserina bloquea α1 y receptores 5HT.",
+      "Bunazosina activa receptores DA y causa euforia."
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "La infinidad de antagonistas β se puede distinguir por las siguientes propiedades:",
+    opciones: [
+      "Afinidad por receptores α, acción vasoconstrictora y toxicidad hepática.",
+      "Selectividad β, actividad simpaticomimética intrínseca, liposolubilidad, bloqueo α, vasodilatación y cinética.",
+      "Activación de receptores dopaminérgicos, liposolubilidad y efecto simpático.",
+      "Acción central, inhibición de acetilcolinesterasa y vida media prolongada."
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los efectos farmacológicos de los antagonistas beta:",
+    opciones: [
+      "Incrementan la contractilidad miocárdica y frecuencia cardiaca.",
+      "Disminuyen FC, contractilidad, PA y consumo de oxígeno; algunos causan vasodilatación.",
+      "Solo actúan en el SNC, generando sedación y analgesia.",
+      "Estimulan β2 y provocan broncodilatación y taquicardia."
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los mecanismos subyacentes a las acciones de los betabloqueadores vasodilatadores:",
+    opciones: [
+      "Labetalol solo bloquea β2; carvedilol activa dopamina; celiprolol aumenta angiotensina.",
+      "Todos bloquean receptores nicotínicos en ganglios simpáticos.",
+      "Labetalol y carvedilol bloquean α1 y β; celiprolol y nebivolol mejoran flujo vascular mediante mecanismos adicionales.",
+      "Solo carvedilol tiene efectos en el SNC; otros no atraviesan la BHE."
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba los usos terapéuticos de los antagonistas beta en diferentes sistemas:",
+    opciones: [
+      "Útiles en hipertensión, angina, ICC; se usan con precaución en EPOC y diabetes.",
+      "Exclusivos para manejo de infecciones cardíacas.",
+      "Reemplazan los inhibidores de la ECA como terapia de primera línea.",
+      "Se usan para broncodilatación en asma."
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Cuadro clínico: nombre del fármaco, presentación farmacológica, dosis y usos terapéuticos – ver ítem 11.",
+    opciones: [
+      "Revisar el cuadro por cuenta propia",
+      "No aplica",
+      "No aplica",
+      "No aplica"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Escriba los efectos adversos y contraindicaciones de los fármacos anteriores:",
+    opciones: [
+      "Todos los betabloqueadores causan bradicardia, hipotensión y están contraindicados en asma y EPOC grave.",
+      "No tienen efectos adversos relevantes; son seguros en todas las poblaciones.",
+      "Solo propranolol causa efectos adversos; los demás no.",
+      "Se utilizan libremente en bradicardia y shock cardiogénico."
+    ],
+    respuesta: 0
+  }
+];
+    const preguntasOpioides1 = [{
+    pregunta: "¿A qué se refiere el término opioide?",
+    opciones: [
+      "A sustancias naturales extraídas directamente del jugo del opio",
+      "A compuestos relacionados estructuralmente o funcionalmente con los productos del opio",
+      "A péptidos producidos por el sistema nervioso central",
+      "A derivados sintéticos sin relación estructural con el opio"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los péptidos opioides endógenos?",
+    opciones: [
+      "Oxitocina, ADH y ACTH",
+      "Encefalinas, endorfinas y dinorfinas",
+      "Prolactina, dopamina y norepinefrina",
+      "Serotonina, GABA y glutamato"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "El principal péptido opioide derivado de POMC es el siguiente:",
+    opciones: [
+      "Leu-encefalina",
+      "Dinorfina A",
+      "β-endorfina",
+      "Met-encefalina"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Los péptidos de proencefalina están presentes en áreas del sistema nervioso central que se cree que están relacionadas con:",
+    opciones: [
+      "El control de la presión arterial y secreción hormonal",
+      "El procesamiento del dolor, comportamiento afectivo, control motor, sistema autónomo y funciones neuroendocrinas",
+      "La regulación de la temperatura corporal y la visión",
+      "El metabolismo de lípidos y la producción de insulina"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son las tres clases de receptores de opioides?",
+    opciones: [
+      "Alfa, beta y gamma",
+      "Muscarínico, nicotínico y serotoninérgico",
+      "μ (MOR), δ (DOR) y κ (KOR)",
+      "NMDA, AMPA y GABA"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuáles son los antagonistas opioides comúnmente utilizados?",
+    opciones: [
+      "Naloxona y naltrexona",
+      "Atropina y escopolamina",
+      "Propanolol y clonidina",
+      "Midazolam y flumazenilo"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿En qué consiste la desensibilización a opioides?",
+    opciones: [
+      "Aumento de sensibilidad al opioide tras su uso continuo",
+      "Disminución aguda de efectividad del opioide por fosforilación o internalización de receptores",
+      "Cambio irreversible en la estructura del receptor",
+      "Disminución de la biodisponibilidad por interacción hepática"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿En qué consiste la tolerancia, dependencia y adicción a opioides?",
+    opciones: [
+      "Tolerancia: adaptación psicológica; Dependencia: efecto placebo; Adicción: uso no terapéutico",
+      "Tolerancia: reducción del efecto; Dependencia: abstinencia al suspender; Adicción: búsqueda compulsiva",
+      "Tolerancia: uso repetido genera abstinencia; Dependencia: daño hepático; Adicción: reversible",
+      "Tolerancia: bloqueo de receptores; Dependencia: por estímulo del cortisol; Adicción: autolimitada"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿En qué consisten los sistemas de contraadaptación?",
+    opciones: [
+      "Reducción permanente del dolor",
+      "Mejora de la eficacia analgésica",
+      "Disminución de los efectos analgésicos y aumento de la sensibilidad al dolor tras exposición prolongada",
+      "Supresión de la función respiratoria central"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuáles son las utilidades clínicas de los opioides?",
+    opciones: [
+      "Analgesia, supresión de tos, tratamiento de diarrea y anestesia",
+      "Antihipertensivos, ansiolíticos, antipsicóticos",
+      "Inmunomoduladores, antipiréticos, hipoglucemiantes",
+      "Antibióticos, antiepilépticos, broncodilatadores"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Los fármacos similares a la morfina producen los siguientes efectos:",
+    opciones: [
+      "Hipotermia, cefalea y ansiedad",
+      "Analgesia, somnolencia y euforia",
+      "Hipertensión, visión borrosa y vómito",
+      "Insomnio, miosis y vértigo"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son las acciones de los opioides a nivel medular?",
+    opciones: [
+      "Estimulan la apertura de canales de sodio en neuronas sensitivas",
+      "Inhiben selectivamente la transmisión nociceptiva en la asta dorsal y reducen entrada de Ca²⁺ en aferentes",
+      "Disminuyen la actividad del sistema simpático lumbar",
+      "Aumentan la liberación de glutamato en interneuronas"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Este efecto y acción farmacológica representa la causa principal de morbilidad secundaria a la terapia con opioides:",
+    opciones: [
+      "Estreñimiento",
+      "Náuseas persistentes",
+      "Depresión respiratoria",
+      "Dependencia física"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuáles son los mecanismos subyacentes de la depresión respiratoria?",
+    opciones: [
+      "Activación de quimiorreceptores centrales",
+      "Estimulación del reflejo tusígeno",
+      "Depresión del centro respiratorio por activación de MOR, reducción de respuesta a CO₂ e hipoxia",
+      "Aumento del tono vagal en pulmones"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Qué factores pueden aumentar el riesgo de depresión respiratoria relacionada con los opioides, incluso a dosis terapéuticas?",
+    opciones: [
+      "Hipotiroidismo, uso de AINEs y dieta rica en sodio",
+      "Sueño, combinación con otros depresores, edad avanzada, enfermedades respiratorias, dolor aliviado",
+      "Hiperglucemia, tabaquismo y ejercicio físico",
+      "Uso de antihistamínicos y betabloqueantes"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los efectos neuroendocrinos causados por los opioides?",
+    opciones: [
+      "Aumento de cortisol y testosterona, inhibición de prolactina",
+      "Reducción de gonadotropinas, aumento de prolactina y ADH, y diuresis por KOR",
+      "Inhibición del eje tiroides-hipófisis y aumento de insulina",
+      "Estimulación del eje adrenal-hipofisario"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuál es el mecanismo de la miosis por uso de opioides?",
+    opciones: [
+      "Estimulación simpática posganglionar",
+      "Inhibición directa del músculo dilatador del iris",
+      "Activación parasimpática por bloqueo de interneuronas GABAérgicas, lo que aumenta el flujo hacia la pupila",
+      "Activación del núcleo supraquiasmático"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Por qué se producen los efectos de tos y emesis?",
+    opciones: [
+      "Estimulación del nervio frénico y núcleo del tracto solitario",
+      "Activación del centro de la tos en la médula y de la zona gatillo en el área postrema",
+      "Depresión del reflejo nauseoso por acción en bulbo raquídeo",
+      "Estimulación de receptores serotoninérgicos centrales"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Qué efectos cardiovasculares producen los opioides?",
+    opciones: [
+      "Vasoconstricción coronaria y aumento del tono simpático",
+      "Aumento del gasto cardíaco",
+      "Vasodilatación periférica, hipotensión ortostática, inhibición barorreceptora",
+      "Bradicardia severa por estimulación vagal directa"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuáles son los efectos gastrointestinales y urinarios de los opioides?",
+    opciones: [
+      "Aumentan secreción ácida y relajan esfínteres",
+      "Disminuyen secreciones intestinales, inhiben el reflejo de micción, aumentan tono del esfínter y causan espasmo del esfínter de Oddi",
+      "Estimulan peristalsis y aumentan secreción de ácido clorhídrico",
+      "Aumentan diuresis y reducen el tono vesical"
+    ],
+    respuesta: 1
+  }
+];
+    const preguntasOpioides2 = [{
+    pregunta: "La mayoría de los agonistas opioides de uso clínico que se presentan en la tabla 20-4 son relativamente selectivos para los MOR y producen los siguientes efectos:",
+    opciones: [
+      "Inmunosupresión, parálisis muscular, hiperglucemia y náuseas",
+      "Analgesia, sedación leve, fiebre e hipertensión",
+      "Analgesia, alteraciones en el estado de ánimo, funciones respiratorias, cardiovasculares, digestivas y neuroendocrinas",
+      "Excitación motora, bradicardia y estimulación del apetito"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Nombre del fármaco que sigue siendo el estándar contra el cual se miden los nuevos analgésicos:",
+    opciones: [
+      "Fentanilo",
+      "Morfina",
+      "Tramadol",
+      "Nalbufina"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los nombres de los agonistas opioides y antagonista-agonistas opioides:",
+    opciones: [
+      "Agonistas: Morfina, Fentanilo, Codeína. Antagonistas: Naloxona, Naltrexona",
+      "Agonistas: Tramadol, Pentazocina, Oxicodona. Agonista-antagonista: Buprenorfina",
+      "Agonistas: Morfina, Codeína, Hidromorfona, Hidrocodona, Meperidina, Metadona, Oxicodona, Oximorfona, Levorfanol, Tramadol, Fentanilo, Buprenorfina. Antagonistas-agonistas: Butorfanol, Nalbufina, Pentazocina",
+      "Agonistas: Codeína, Naloxona. Antagonistas: Metadona, Levorfanol"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Cuáles son los usos de la codeína:",
+    opciones: [
+      "Antitusivo y ansiolítico",
+      "Analgésico y depresor respiratorio",
+      "Anticonvulsivo y antiemético",
+      "Hipnótico y antipsicótico"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Describa los efectos secundarios y precauciones en el uso de la morfina y sus congéneres:",
+    opciones: [
+      "Náuseas, vómitos, aumento de la PA y delirio; contraindicado en embarazo",
+      "Hipotensión, depresión respiratoria, prurito, delirio, retención urinaria; precaución por hiperalgesia tras retiro",
+      "Diarrea, hiperreflexia, hiperpigmentación",
+      "Hiperglucemia, bradicardia y hepatotoxicidad"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los factores que afectan la respuesta de los pacientes con el uso de la morfina y sus congéneres:",
+    opciones: [
+      "Tipo de dolor, IMC, hidratación y resistencia genética",
+      "Barrera hematoencefálica, edad, estado del dolor, metabolismo, sexo, función respiratoria, lesión craneal, hipovolemia, asma",
+      "Capacidad renal, glucemia y tipo de dieta",
+      "Actividad física, dieta rica en calcio y estrés"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los aspectos importantes del levorfanol:",
+    opciones: [
+      "Agonista MOR, potente analgésico, vida media prolongada, mayor riesgo de náuseas que morfina",
+      "Agonista MOR y DOR, baja biodisponibilidad oral, menor potencia que morfina",
+      "Agonista MOR, KOR y DOR, disponible IV/IM/oral, 7 veces más potente que la morfina, causa menos náuseas y vómitos",
+      "Antagonista parcial de MOR, con efectos sedantes y antiinflamatorios"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Describa los aspectos más importantes de la meperidina, loperamida y difenoxilato:",
+    opciones: [
+      "Meperidina: acción antipirética; Loperamida: sedante; Difenoxilato: antitusígeno",
+      "Meperidina: agonista MOR en SNC, efecto analgésico y sobre músculo liso; Loperamida: reduce motilidad GI; Difenoxilato: antidiarreico",
+      "Meperidina: antagonista débil; Loperamida: emético; Difenoxilato: antiinflamatorio",
+      "Meperidina: anestésico local; Loperamida: inhibe secreciones gástricas; Difenoxilato: broncodilatador"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Cuáles son los fármacos congéneres del fentanilo y los aspectos más importantes:",
+    opciones: [
+      "Alfentanilo, sufentanilo y remifentanilo; todos son derivados con rápida acción y uso anestésico",
+      "Naloxona, pentazocina y tramadol; actúan en KOR",
+      "Codeína, oximorfona y metadona; uso ambulatorio",
+      "Levorfanol, loperamida y dextrometorfano; poco lipofílicos"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Describa los aspectos farmacológicos más importantes del tramadol:",
+    opciones: [
+      "Agonista MOR fuerte, mayor eficacia que morfina, duración >10 h",
+      "Agonista MOR débil, inhibe recaptación de norepinefrina y serotonina, eficaz en dolor leve a moderado, duración ~6 h",
+      "Antagonista MOR, útil para sobredosis",
+      "Agonista KOR, con efecto antitusivo predominante"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Cuáles son los nombres de los fármacos opioides parciales:",
+    opciones: [
+      "Buprenorfina, Pentazocina, Nalbufina, Butorfanol",
+      "Morfina, Tramadol, Oxicodona, Fentanilo",
+      "Naloxona, Naltrexona, Levorfanol, Codeína",
+      "Metadona, Difenoxilato, Loperamida, Meperidina"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Cuáles son los efectos farmacológicos de la nalbufina y buprenorfina:",
+    opciones: [
+      "Nalbufina: Estimulación del apetito. Buprenorfina: Euforia intensa",
+      "Nalbufina: Analgesia y disminución de respiración. Buprenorfina: Analgesia prolongada, terapia de sustitución",
+      "Nalbufina: Antitusígeno. Buprenorfina: Disminución de la presión arterial",
+      "Nalbufina: Hipotermia. Buprenorfina: Estimulación simpática"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba las propiedades farmacológicas de los antagonistas opioides:",
+    opciones: [
+      "Estimulan el sistema nervioso simpático, y suprimen el eje HPA",
+      "No tienen utilidad clínica; solo sirven como estudios experimentales",
+      "Tienen utilidad en sobredosis, pocos efectos en ausencia de agonistas, efectos hemodinámicos positivos si hay activación previa",
+      "Son útiles en dolor crónico leve, pero no en depresión respiratoria"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Cuáles son los usos terapéuticos de los antagonistas opioides:",
+    opciones: [
+      "Anestesia general",
+      "Tratamiento de intoxicación por opioides, especialmente la depresión respiratoria",
+      "Control de náuseas inducidas por opioides",
+      "Prevención de tolerancia a opioides"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Nombre de los antitusivos opioides de acción central:",
+    opciones: [
+      "Difenoxilato, Metadona, Nalbufina",
+      "Dextrometorfano, Folcodina, Benzonatato",
+      "Tramadol, Buprenorfina, Pentazocina",
+      "Loperamida, Meperidina, Levorfanol"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Qué otras vías de administración de los opioides se mencionan en el capítulo:",
+    opciones: [
+      "Oral, tópica, sublingual",
+      "Intranasal, oral, cutánea",
+      "Analgesia controlada por el paciente, raquídea, rectal, oral transmucosa, transnasal y transdérmica",
+      "Inhalatoria, intraarticular y subconjuntival"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Cuáles son las variables que modifican el uso terapéutico de los opioides:",
+    opciones: [
+      "Edad, presencia de hiperglucemia y tipo de dieta",
+      "Variabilidad del paciente, tipo e intensidad del dolor, vía de administración, ajuste de dosis, rotación de opioides, tolerancia, estado físico y genética",
+      "Temperatura ambiente, nivel educativo y consumo de cafeína",
+      "Nivel de oxigenación, función hepática y absorción intestinal"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Los usos terapéuticos no analgésicos de los opioides son:",
+    opciones: [
+      "Tratamiento de hipertensión y migraña",
+      "Control de insomnio y estimulación del apetito",
+      "Tratamiento de disnea, adyuvantes anestésicos, causan rigidez muscular en dosis altas",
+      "Estimulación cognitiva y reducción de inflamación crónica"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba la triada característica presente en la intoxicación por opioides:",
+    opciones: [
+      "Midriasis, hipertensión, taquipnea",
+      "Bradicardia, vómitos y visión borrosa",
+      "Coma, pupilas puntiformes, respiración deprimida",
+      "Convulsiones, diaforesis y dolor torácico"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Describa el tratamiento utilizado en la intoxicación por opioides:",
+    opciones: [
+      "Administración de AINES y antieméticos de forma rápida",
+      "Iniciar terapia con opioides antagonistas sin establecer vía aérea",
+      "Establecer vía aérea, ventilar, administrar naloxona diluida lentamente, evitar abstinencia súbita, repetir dosis si es necesario",
+      "Administrar glucosa intravenosa y vigilar función renal"
+    ],
+    respuesta: 2
+  }];
+    const preguntasAntidepresivos = [
+    {
+    pregunta: "¿Cuáles son los grupos farmacológicos útiles en el tratamiento de la depresión?",
+    opciones: [
+      "Solo antidepresivos tricíclicos y benzodiacepinas",
+      "ISRS, IRSN, antidepresivos atípicos, tricíclicos, IMAO y algunos antipsicóticos atípicos",
+      "Solo inhibidores de monoaminooxidasa y benzodiacepinas",
+      "ISRS, beta bloqueadores y antihistamínicos sedantes"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Qué inconvenientes pueden surgir al inicio del tratamiento de la depresión y la ansiedad?",
+    opciones: [
+      "Rápido alivio de síntomas y pocos efectos adversos",
+      "Inicio inmediato de mejoría, pero con muchos efectos extrapiramidales",
+      "Retraso terapéutico, efectos adversos iniciales, riesgo de episodios maníacos o suicidio en algunos pacientes, y necesidad de tratamiento prolongado",
+      "Solo sedación y riesgo bajo de recaídas"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Elabore un cuadro con grupo farmacológico, fármacos representantes, aspectos importantes y efectos adversos.",
+    opciones: [
+      "[Tabla – revisar por cuenta propia]",
+      "No aplica",
+      "No aplica",
+      "No aplica"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cuáles son algunas interacciones farmacológicas importantes de los antidepresivos?",
+    opciones: [
+      "Todos los antidepresivos potencian la insulina y causan hipoglucemia",
+      "Solo los ISRS tienen interacciones; el resto son seguros",
+      "Muchos antidepresivos afectan enzimas del citocromo P450 y pueden causar síndrome serotoninérgico si se combinan con IMAO o drogas serotoninérgicas",
+      "Los antidepresivos solo interactúan con alcohol y cafeína"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Qué fármacos se utilizan para tratar la ansiedad?",
+    opciones: [
+      "Solo benzodiacepinas y antihistamínicos",
+      "ISRS, IRSN, benzodiacepinas, buspirona, beta bloqueadores y ocasionalmente antihistamínicos",
+      "Antipsicóticos atípicos y anticolinérgicos",
+      "Antidepresivos tricíclicos exclusivamente"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son algunas interacciones farmacológicas importantes de los antidepresivos?",
+    opciones: [
+      "Todos los antidepresivos potencian la insulina y causan hipoglucemia",
+      "Solo los ISRS tienen interacciones; el resto son seguros",
+      "ISRS inhiben CYP2D6 y aumentan niveles de fármacos; combinados con IMAO o MDMA causan síndrome serotoninérgico. SNRI también interactúan con IMAO. Bupropión inhibe CYP2D6. ATC aumentan sus niveles con ISRS y pueden potenciar efectos cardiacos si se combinan con simpaticomiméticos o anticolinérgicos",
+      "Los antidepresivos solo interactúan con alcohol y cafeína"
+    ],
+    respuesta: 2
+  } 
+    ];
+    const preguntasAntipsicoticos = [{
+    pregunta: "Escriba los aspectos más importantes del tratamiento antipsicótico a corto plazo:",
+    opciones: [
+      "Se utiliza solo en esquizofrenia crónica, con tratamiento indefinido",
+      "Se usa en fases estables para mantener la remisión",
+      "Se administra durante y poco después de la exacerbación, y puede suspenderse tras la resolución de síntomas",
+      "Se recomienda evitar en demencia por riesgo de efectos anticolinérgicos"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba los aspectos más importantes del tratamiento antipsicótico a largo plazo:",
+    opciones: [
+      "Tiene como objetivo revertir síntomas negativos rápidamente",
+      "Es exclusivo para manías y delirios agudos",
+      "Se usa en esquizofrenia y otros trastornos persistentes, buscando reducir síntomas positivos, mejorar funcionalidad y prevenir recaídas",
+      "Produce efectos inmediatos en la función cognitiva"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba los medicamentos útiles en el tratamiento de las manías así como los aspectos más importantes:",
+    opciones: [
+      "Solo haloperidol es útil en manía aguda",
+      "Clozapina y quetiapina no tienen indicación alguna",
+      "Aripiprazol, olanzapina, risperidona, haloperidol, combinados con litio o valproato, mejoran control sintomático y previenen recaídas",
+      "Todos los antipsicóticos están contraindicados en manía"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Los objetivos inmediatos del tratamiento antipsicótico agudo son:",
+    opciones: [
+      "Suprimir totalmente los síntomas en 24 horas",
+      "Controlar síntomas psicóticos, reducir agitación, obtener efecto rápido y usar vías apropiadas de administración",
+      "Iniciar tratamiento con antidepresivos en combinación",
+      "Evitar toda intervención farmacológica en pacientes ancianos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Qué medicamentos se utilizan en el tratamiento de la esquizofrenia:",
+    opciones: [
+      "Anticolinérgicos y benzodiacepinas exclusivamente",
+      "Clozapina, haloperidol, ziprasidona, aripiprazol, risperidona",
+      "Solo antipsicóticos típicos de baja potencia",
+      "Inhibidores selectivos de la recaptación de serotonina"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Qué medicamentos se utilizan en la recaída psicótica:",
+    opciones: [
+      "Risperidona oral de liberación inmediata",
+      "Flufenazina decanoato, haloperidol decanoato, risperidona LAI, paliperidona palmitato, aripiprazol monohidrato y lauroxil, olanzapina pamoato",
+      "Carbamazepina y lamotrigina",
+      "Antidepresivos tricíclicos y ISRS"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los nombres de los medicamentos útiles en el tratamiento de la psicosis y esquizofrenia según las familias a la que pertenecen:",
+    opciones: [
+      "Típicos: haloperidol, clorpromazina; Atípicos: risperidona, clozapina; Inyectables: paliperidona, aripiprazol",
+      "Solo antipsicóticos típicos orales",
+      "ISRS y benzodiacepinas",
+      "Todos los neurolépticos de acción corta"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Qué otros usos tienen los medicamentos antipsicóticos y para la esquizofrenia:",
+    opciones: [
+      "Únicamente para esquizofrenia crónica refractaria",
+      "Trastorno bipolar, psicosis en Parkinson, demencia con psicosis, tics, Huntington",
+      "Solo en autismo infantil",
+      "No tienen otros usos fuera de la esquizofrenia"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Describa los efectos adversos por las afinidades predichas de los fármacos al receptor de monoamina:",
+    opciones: [
+      "Hiperglucemia, hipertensión y mialgias",
+      "Discinesia tardía, parkinsonismo, síndrome neuroléptico maligno, distonía aguda, acatisia",
+      "Náuseas y vómitos exclusivamente",
+      "Fotofobia y anorexia"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "El antagonismo central de los receptores H1 está asociado con dos efectos adversos principales:",
+    opciones: [
+      "Hipotensión y taquicardia",
+      "Sedación y aumento de peso por estimulación del apetito",
+      "Bradicardia y temblores",
+      "Alteraciones visuales y fiebre"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Describa los efectos adversos por las afinidades no predichas de los fármacos al receptor de monoamina:",
+    opciones: [
+      "Insomnio y estreñimiento",
+      "Dislipidemia, hiperglucemia, arritmias ventriculares, convulsiones, retinopatía",
+      "Hipotermia e hipocalcemia",
+      "Prurito e ictericia"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba las interacciones medicamentosas de los antipsicóticos:",
+    opciones: [
+      "Todos los antipsicóticos inhiben CYP3A4 fuertemente",
+      "Pocos antipsicóticos inhiben CYP2D6 (como clorpromazina), y hay que vigilar tabaquismo y niveles plasmáticos (ej. clozapina)",
+      "Son seguros y sin interacción",
+      "Solo interaccionan con anticoagulantes"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Qué fármacos se utilizan en poblaciones pediátricas:",
+    opciones: [
+      "Solo benzodiacepinas",
+      "Aripiprazol, olanzapina, quetiapina, risperidona, lurasidona, paliperidona",
+      "Clozapina exclusivamente",
+      "Haloperidol en cualquier edad"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Qué fármacos se utilizan en poblaciones geriátricas:",
+    opciones: [
+      "Haloperidol y tioridazina a dosis altas",
+      "Aripiprazol, olanzapina, quetiapina, risperidona, clozapina, con atención a interacciones",
+      "Benzodiacepinas de acción prolongada",
+      "Solo anticonvulsivos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Qué fármacos se utilizan en embarazadas y lactantes:",
+    opciones: [
+      "Aripiprazol, quetiapina, risperidona: nulo paso placentario",
+      "Olanzapina (mayor paso), haloperidol, risperidona, quetiapina",
+      "Clozapina es segura en embarazo",
+      "Se recomiendan inhibidores de VMAT2"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba las propiedades farmacológicas del tratamiento de las manías:",
+    opciones: [
+      "Clozapina y olanzapina útiles como monoterapia; valproato, carbamazepina y lamotrigina como estabilizadores del ánimo; litio con propiedades neuroprotectoras",
+      "Todos los antipsicóticos causan empeoramiento de manía",
+      "ISRS y benzodiacepinas son el tratamiento principal",
+      "Los anticonvulsivos no tienen uso en manía"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "En qué consiste la hipótesis para el mecanismo de acción del litio y su relación con los anticonvulsivos:",
+    opciones: [
+      "Actúa bloqueando canales de sodio exclusivamente",
+      "Afecta monoaminas, segundos mensajeros, PKC, GSK-3β e inositol; comparte mecanismos con valproato",
+      "Activa receptores dopaminérgicos",
+      "Estimula la síntesis de cortisol"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Cuáles son los usos terapéuticos del litio:",
+    opciones: [
+      "Solo en manía aguda",
+      "Tratamiento y prevención de manía, reducción del suicidio, adyuvante en depresión, neuroprotector potencial",
+      "Exclusivo en esquizofrenia refractaria",
+      "No se recomienda en adolescentes"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Cuáles son las interacciones medicamentosas y efectos adversos del litio:",
+    opciones: [
+      "No tiene interacciones ni efectos relevantes",
+      "Interactúa con diuréticos, AINES, IECAs; puede causar temblor, ataxia, hipotiroidismo, poliuria, arritmias, teratogenicidad",
+      "Solo interacciona con anticonvulsivos",
+      "Es seguro en el embarazo y la lactancia"
+    ],
+    respuesta: 1
+  }
+];
+    const preguntasAnestesiaG = [{
+    pregunta: "La administración de anestesia general persigue tres objetivos generales:",
+    opciones: [
+      "Inducir coma, causar hipotermia y prevenir hemorragias",
+      "Estimular el sistema nervioso central y aumentar la presión arterial",
+      "Minimizar efectos nocivos, mantener la homeostasis, mejorar efectos postoperatorios",
+      "Aumentar la diuresis, inducir hipoglucemia y elevar temperatura corporal"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Explique los efectos hemodinámicos, respiratorios, hipotermia, náuseas de los anestésicos generales:",
+    opciones: [
+      "Aumentan presión arterial, estimulan respiración, causan fiebre y hambre",
+      "Suprimen reflejos protectores, reducen frecuencia respiratoria, inducen hipotermia e incrementan riesgo de náuseas",
+      "Estimulan centro respiratorio, causan bradicardia y diaforesis",
+      "Disminuyen frecuencia cardíaca, producen hiperventilación e hiperglucemia"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Los componentes del estado anestésico incluyen:",
+    opciones: [
+      "Hiperventilación, somnolencia, delirio y rigidez muscular",
+      "Amnesia, analgesia, inconsciencia, respuesta a estímulos nocivos",
+      "Relajación, hambre, taquicardia y ansiedad",
+      "Diuresis, apnea, hipoalgesia y visión borrosa"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿En qué consisten los efectos moleculares de la anestesia general?",
+    opciones: [
+      "Activan receptores dopaminérgicos y bloquean receptores muscarínicos",
+      "Aumentan el metabolismo de acetilcolina",
+      "Potencian GABA-A e inhiben NMDA, provocando hiperpolarización neuronal",
+      "Solo bloquean canales de calcio presinápticos"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿En qué consisten los efectos celulares de la anestesia general?",
+    opciones: [
+      "Estimulan la liberación de insulina y dopamina",
+      "Aumentan el flujo plasmático hepático",
+      "Hiperpolarizan neuronas e inhiben sinapsis excitatorias",
+      "Estimulan la síntesis de proteínas en axones"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "En 5 líneas describa los efectos farmacocinéticos más importantes de los anestésicos generales:",
+    opciones: [
+      "Son hidrofóbicos, redistribuidos antes de metabolizarse, eliminados por hígado/riñón, se acumulan en grasa, y sus efectos varían según perfusión",
+      "Son completamente hidrosolubles y se almacenan solo en hueso",
+      "Son metabolizados por enzimas digestivas",
+      "Se excretan solo por saliva"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Escriba cómo se dividen los anestésicos generales y los fármacos representantes de cada grupo:",
+    opciones: [
+      "Solo inhalados y parenterales sin distinción clara",
+      "Parenterales (propofol, ketamina), inhalados (isoflurano, halotano), auxiliares (benzodiacepinas, relajantes musculares)",
+      "Analgésicos, vasopresores y simpaticolíticos",
+      "Sedantes, antidepresivos y opioides"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba la dosis de inducción del Propofol y los efectos adversos:",
+    opciones: [
+      "0.5-1 mg/kg; estimula SNC y causa hipertensión",
+      "1.5-2.5 mg/kg; deprime SNC, baja PA, depresión respiratoria",
+      "3-4 mg/kg; produce excitación y bradicardia",
+      "2-3 mg/kg; aumenta flujo cerebral y causa convulsiones"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba el uso principal y los efectos adversos del etomidato:",
+    opciones: [
+      "Inductor anestésico en pacientes estables; causa taquicardia e hipertermia",
+      "Uso en hipertensión refractaria; estimula SNC y aumenta el gasto cardiaco",
+      "Inducción anestésica en riesgo de hipotensión; mínimo efecto hemodinámico, menor depresión respiratoria",
+      "Solo para procedimientos dentales; causa hipocalemia"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba los usos principales de la ketamina y los efectos secundarios:",
+    opciones: [
+      "Inductor en pacientes estables; causa hipotensión",
+      "Útil en hipotensión y broncoespasmo; aumenta PA, FC, PIC y flujo cerebral",
+      "Contraindicada en pediatría; causa disnea y apnea",
+      "Se usa solo como antidepresivo"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Los tres barbitúricos más comúnmente utilizados en anestesia clínica son:",
+    opciones: [
+      "Diazepam, midazolam y lorazepam",
+      "Tiopental, tiamilal y metohexital",
+      "Propofol, etomidato y ketamina",
+      "Halotano, isoflurano y sevoflurano"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los efectos secundarios de los barbitúricos en los diferentes sistemas?",
+    opciones: [
+      "Estimulación del SNC, bradicardia e hiperventilación",
+      "Somnolencia, vasodilatación, depresión respiratoria",
+      "Insomnio, taquicardia e hiperpnea",
+      "Hipervigilancia, hipertensión, hipoxemia"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los efectos secundarios del isoflurano:",
+    opciones: [
+      "Hipertensión, aumento del gasto cardiaco y aumento de FGR",
+      "Hipotensión, broncodilatación, aumento de PIC, reducción de CMRo2, irritación respiratoria",
+      "Estimulación simpática, vasoconstricción y apnea",
+      "Aumento de PA y gasto cardíaco"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los efectos secundarios del sevoflurano:",
+    opciones: [
+      "Taquicardia, hipertensión y broncoconstricción",
+      "No afecta sistema cardiovascular ni respiratorio",
+      "Disminuye PA y gasto cardíaco, nefrotoxicidad potencial",
+      "Aumenta contractilidad y reduce flujo cerebral"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba los efectos secundarios del desflurano:",
+    opciones: [
+      "Hipertensión, bradicardia y depresión del SNC",
+      "Hipotensión, taquicardia, irritación respiratoria, aumento de PIC",
+      "Disminución de PIC y excitación muscular",
+      "Aumento de PA y vasoconstricción"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los efectos secundarios del halotano:",
+    opciones: [
+      "Produce hipotensión, arritmias, hepatotoxicidad, apnea",
+      "Disminuye PIC y causa broncodilatación",
+      "Estimula el sistema inmune y aumenta la PA",
+      "Solo produce efectos respiratorios leves"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "Escriba los efectos secundarios del óxido nitroso:",
+    opciones: [
+      "Hipotensión severa y depresión respiratoria profunda",
+      "Aumenta FC, PA, CBF y PIC, y tono venoso pulmonar",
+      "Induce hipoglucemia y disminuye ventilación",
+      "Causa broncoconstricción e hipocalcemia"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba el nombre de los anestésicos auxiliares:",
+    opciones: [
+      "Glucocorticoides y ISRS",
+      "Benzodiacepinas (midazolam, diazepam), agonistas α2 (dexmedetomidina), AINEs, COX-2, relajantes musculares",
+      "Solo inhibidores de prostaglandinas",
+      "Antagonistas de GABA"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los gases terapéuticos?",
+    opciones: [
+      "Oxígeno, ozono, amoníaco, sulfuro de carbono",
+      "Oxígeno, dióxido de carbono, óxido nitroso, helio, sulfuro de hidrógeno",
+      "Argón, helio, xenón, nitrógeno, cloro",
+      "Solo oxígeno y nitrógeno"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Clásicamente, hay cinco causas de hipoxemia:",
+    opciones: [
+      "Disminución de dopamina, hipotermia, acidosis, fiebre, hiperglucemia",
+      "Hipovolemia, hipoventilación, anemia, hipercapnia, hipercalcemia",
+      "Fracción baja de oxígeno, hipoventilación, desajuste V/Q, cortocircuito, difusión alterada",
+      "Hipoxemia, hiperoxia, alcalosis, acidosis, hipokalemia"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba los efectos de la hipoxemia:",
+    opciones: [
+      "Hiperglucemia, daño hepático y ataxia",
+      "Afecta metabolismo celular, supervivencia celular y de órganos, y función de sistemas orgánicos",
+      "Mejora el transporte de oxígeno",
+      "Estimula la médula suprarrenal"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Explique cómo se monitorea la oxigenación y escriba las complicaciones de la oxigenoterapia:",
+    opciones: [
+      "Se monitorea por electrocardiograma y puede causar miosis",
+      "Por oximetría de pulso; exceso puede causar atelectasia, irritación mucosa, riesgo de incendio",
+      "Solo se mide por gases arteriales",
+      "Aumenta la resistencia periférica"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los principales usos de la oxigenoterapia:",
+    opciones: [
+      "Sedación y tratamiento del insomnio",
+      "Corrección de hipoxia, reducción de gases inertes, oxígeno hiperbárico",
+      "Prevención de hipoglucemia",
+      "Estimulación inmunitaria"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los principales usos de la administración de dióxido de carbono:",
+    opciones: [
+      "Estimulación de la médula ósea y de la retina",
+      "Tratamiento de hipocalcemia",
+      "Protección contra hipoxia, muerte celular, hemorragia, isquemia y reperfusión",
+      "Estimulación de secreción biliar"
+    ],
+    respuesta: 2
+  }
+];
+    const preguntasAnestesiaL = [{
+    pregunta: "¿Cuál es el mecanismo de acción de los anestésicos locales?",
+    opciones: [
+      "Estimulan receptores dopaminérgicos",
+      "Bloquean los canales de potasio",
+      "Inhiben la entrada de sodio en los canales dependientes de voltaje",
+      "Estimulan la liberación de acetilcolina"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Para la mayoría de los pacientes, el tratamiento con anestésicos locales causa los siguientes efectos:",
+    opciones: [
+      "Aumento del tono muscular y aumento de temperatura",
+      "Pérdida progresiva del dolor, temperatura, palpación, presión profunda y función motora",
+      "Bradicardia y pérdida de la conciencia",
+      "Hipotermia, taquicardia y apnea"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los efectos que producen los vasoconstrictores en la acción de los anestésicos locales?",
+    opciones: [
+      "Disminuyen el dolor y aumentan la vasodilatación",
+      "Aumentan la excreción renal de anestésico",
+      "Prolongan la acción, localizan el efecto, reducen toxicidad y pueden aumentarla si se absorbe sistémicamente",
+      "Inhiben los receptores colinérgicos"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Describa los aspectos más importantes de cada uno de los efectos indeseables con el uso de los anestésicos locales.",
+    opciones: [
+      "Solo producen reacciones alérgicas leves",
+      "Pueden causar estimulación y depresión del SNC, efectos cardiovasculares, musculares, neuromusculares y reacciones alérgicas",
+      "Únicamente afectan la presión arterial",
+      "Aumentan el metabolismo hepático"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Escriba los aspectos más importantes de la lidocaína y bupivacaína:",
+    opciones: [
+      "Lidocaína es éster y bupivacaína es opioide",
+      "Ambas se eliminan por pulmones",
+      "Lidocaína actúa rápido; bupivacaína es prolongada y más cardiotóxica",
+      "Ambas se absorben solo por vía sublingual"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuáles son las diferentes vías de administración de los anestésicos locales?",
+    opciones: [
+      "Intramuscular, intravenosa, sublingual, transdérmica",
+      "Tópica, infiltración, bloqueo nervioso, intravenosa regional, raquídea, epidural",
+      "Oral, intranasal, ocular",
+      "Intraósea, intraarticular"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Describa los diferentes anestésicos locales para inyección y las características más importantes para cada uno:",
+    opciones: [
+      "Todos tienen la misma potencia y duración",
+      "Articaína (uso dental), cloroprocaína (acción corta), mepivacaína (intermedia), prilocaína (poca vasodilatación), procaína (uso en penicilina), ropivacaína (menos motora), tetracaína (acción prolongada)",
+      "Solo lidocaína y tetracaína son inyectables",
+      "Todos son ésteres de acción prolongada"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los agentes utilizados para anestesia en piel y mucosas?",
+    opciones: [
+      "Lidocaína, bupivacaína, ropivacaína",
+      "Morfina, fentanilo, prilocaína",
+      "Dibucaína, diclonina, pramoxina",
+      "Paracetamol, ibuprofeno y naproxeno"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuáles son los nombres de los anestésicos para uso oftalmológico?",
+    opciones: [
+      "Lidocaína y prilocaína",
+      "Proparacaína y tetracaína",
+      "Bupivacaína y ropivacaína",
+      "Diclonina y benzocaína"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "La dosis total máxima segura para la anestesia tópica en un adulto saludable de 70 kg de peso es:",
+    opciones: [
+      "Lidocaína 100 mg, Cocaína 50 mg, Tetracaína 10 mg",
+      "Lidocaína 300 mg, Cocaína 150 mg, Tetracaína 50 mg",
+      "Lidocaína 500 mg, Cocaína 200 mg, Tetracaína 75 mg",
+      "Lidocaína 600 mg, Cocaína 100 mg, Tetracaína 25 mg"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿En qué consiste la anestesia por infiltración y qué fármacos se utilizan?",
+    opciones: [
+      "Inyección sobre nervios periféricos, uso de fentanilo",
+      "Administración epidural de lidocaína",
+      "Inyección directa en tejidos, usando lidocaína 0.5–1% y bupivacaína 0.125–0.25%",
+      "Infusión venosa continua"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿En qué consiste la anestesia por bloqueo de campo?",
+    opciones: [
+      "Inyección intramuscular generalizada",
+      "Anestesia tópica",
+      "Inyección subcutánea para anestesiar área distal con menor volumen",
+      "Técnica intraósea"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿En qué consiste la anestesia de bloqueo de nervios?",
+    opciones: [
+      "Administración oral de anestésicos",
+      "Inyección sobre médula espinal",
+      "Inyección en o alrededor de nervios periféricos o plexos para bloquear áreas grandes y relajar músculo",
+      "Rocío de anestésico en mucosa"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿En qué consiste la anestesia regional intravenosa y cuáles son las ventajas y desventajas del uso?",
+    opciones: [
+      "Técnica intraósea de uso universal",
+      "Inyección en sistema nervioso central",
+      "Bloqueo de Bier: anestesia de extremidades con torniquete; simple pero limitada y de riesgo si falla torniquete",
+      "Aplicación cutánea de anestésico"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Describa los aspectos más importantes de la anestesia raquídea:",
+    opciones: [
+      "Solo se usa para odontología",
+      "Técnica para miembro superior",
+      "Se usa en abdomen inferior, extremidades y perineo; requiere bloqueo simpático",
+      "No requiere anestésico adicional"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Describa los aspectos más importantes de la anestesia epidural:",
+    opciones: [
+      "Solo se administra oralmente",
+      "Es idéntica a la raquídea",
+      "Inyección en espacio epidural; permite catéteres, requiere selección de fármaco por duración; puede causar depresión neonatal",
+      "No se usa en obstetricia"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Escriba dos diferencias entre la anestesia epidural y la raquídea:",
+    opciones: [
+      "La epidural causa bloqueo simpático más intenso",
+      "La raquídea es más profunda",
+      "La epidural puede causar mayor concentración sistémica y no tiene bloqueo simpático diferencial como la raquídea",
+      "No existen diferencias relevantes"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuál es el beneficio del uso de opioides por vía epidural e intratecal?",
+    opciones: [
+      "Disminuyen la frecuencia cardíaca",
+      "Producen anestesia general",
+      "Brindan analgesia segmental prolongada para cirugía o dolor postoperatorio/crónico",
+      "Inhiben metabolismo hepático"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Qué fármacos se utilizan para administrar anestesia raquídea?",
+    opciones: [
+      "Midazolam, diazepam y fentanilo",
+      "Lidocaína, tetracaína y bupivacaína",
+      "Ibuprofeno, naproxeno y diclofenaco",
+      "Ketamina, propofol y morfina"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son las toxinas biológicas?",
+    opciones: [
+      "Difenhidramina y ketamina",
+      "Tetrodotoxina y saxitoxina",
+      "Paracetamol y alcohol etílico",
+      "Morfina y lidocaína"
+    ],
+    respuesta: 1
+  }
+];
+    const preguntasAntiepilepticos = [
+    {
+    pregunta: "¿Cuáles son los diferentes grupos en que se subdividen los fármacos antiepilépticos?",
+    opciones: [
+      "Anticolinérgicos, antipsicóticos, yantihipertensivos",
+      "Hidantoínas, benzodiacepinas, barbitúricos, iminoestilbenos, succinimidas, otros anticonvulsivos",
+      "AINES, ISRS y betabloqueadores",
+      "Opioides, simpaticomiméticos y corticoides"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los distintos mecanismos de acción y fármacos pertenecientes a cada uno de ellos?",
+    opciones: [
+      "Todos los fármacos actúan sobre receptores GABA exclusivamente",
+      "Se dividen por metabolismo hepático",
+      "Incluyen moduladores de canales de Na+ y Ca²⁺, ligandos α2δ, agonistas GABA, antagonistas NMDA/AMPA, canales HCN, KCNQ y SV2A",
+      "Solo bloquean canales de calcio"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Qué características debe poseer el fármaco antiepiléptico ideal?",
+    opciones: [
+      "Que inhiba todos los receptores NMDA sin efectos secundarios",
+      "Suprime todas las convulsiones, sin efectos adversos ni SNC ni teratogenicidad, monoterapia efectiva",
+      "Actúe solo sobre el sistema digestivo",
+      "Inhibición de receptores colinérgicos y dopaminérgicos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los usos de la fenitoína y sus principales efectos adversos?",
+    opciones: [
+      "Solo para epilepsia generalizada y causa hepatitis leve",
+      "Crisis tónico-clónicas y neuralgias; puede causar atrofia cerebelosa, hiperplasia gingival, anemia megaloblástica y toxicidad dependiente de dosis/vía",
+      "Exclusivo en niños con síndrome de Lennox-Gastaut",
+      "No tiene efectos tóxicos conocidos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son las utilidades clínicas de las benzodiacepinas en pacientes epilépticos?",
+    opciones: [
+      "Solo se usan para sedación preoperatoria",
+      "Diazepam y lorazepam en estado epiléptico; clonazepam para ausencias y mioclónicas; clobazam para Lennox-Gastaut",
+      "No tienen uso en epilepsia",
+      "Solo actúan como relajantes musculares"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son las utilidades clínicas del fenobarbital y sus efectos adversos?",
+    opciones: [
+      "Se usa en cefaleas tensionales",
+      "Convulsiones tónico-clónicas y focales; puede causar sedación, irritabilidad, rash, anemia megaloblástica, osteomalacia",
+      "Solo sirve como hipnótico",
+      "No se recomienda en niños ni ancianos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los usos terapéuticos y efectos adversos de la carbamazepina?",
+    opciones: [
+      "Usada para crisis focales, bipolaridad, neuralgias; puede causar vértigo, visión borrosa, hiponatremia, hepatotoxicidad",
+      "Solo se usa en neuropatías periféricas",
+      "No tiene efectos adversos conocidos",
+      "Exclusiva para niños"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cuáles son los usos terapéuticos y efectos adversos de la etosuximida?",
+    opciones: [
+      "Indicada solo para dolor agudo",
+      "Crisis de ausencia; puede causar síntomas GI, SNC, alteraciones psiquiátricas, lupus, pancitopenia",
+      "Es un relajante muscular",
+      "No tiene efecto terapéutico probado"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los usos terapéuticos de la gabapentina y pregabalina?",
+    opciones: [
+      "Solo fibromialgia",
+      "Convulsiones focales, dolor neuropático, fibromialgia (pregabalina), requiere ajuste por función renal",
+      "Se usan en infecciones respiratorias",
+      "Tratamiento de depresión mayor"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los usos terapéuticos y efectos adversos de la lamotrigina?",
+    opciones: [
+      "Solo para ansiedad y psicosis",
+      "Convulsiones tónico-clónicas, Lennox-Gastaut, ausencias; puede causar mareos, ataxia, náuseas, rash",
+      "Solo se usa en embarazadas",
+      "No tiene eficacia comprobada"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los usos terapéuticos y efectos adversos del topiramato?",
+    opciones: [
+      "Solo para convulsiones febriles",
+      "Epilepsia focal y generalizada refractaria; causa somnolencia, pérdida de peso, cálculos renales, alteración del gusto",
+      "No debe usarse en adultos",
+      "Solo útil para prevenir migraña"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los usos terapéuticos y efectos adversos del valproato?",
+    opciones: [
+      "Solo se usa en depresión",
+      "Crisis de ausencia, mioclónicas, tónico-clónicas; causa náuseas, ataxia, alopecia, hepatitis, teratogenicidad",
+      "Exclusivo en neonatos",
+      "No se recomienda por efectos hepáticos severos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los usos terapéuticos y efectos adversos del levetiracetam?",
+    opciones: [
+      "No se usa en epilepsia",
+      "Adjuntos en crisis focales, tónico-clónicas, mioclónicas; puede causar somnolencia, astenia, cambios de ánimo",
+      "Solo se usa como sedante",
+      "Altamente hepatotóxico"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Aspectos importantes al iniciar tratamiento con fármacos antiepilépticos?",
+    opciones: [
+      "Siempre iniciar con dosis máxima y combinación de fármacos",
+      "Comenzar con dosis baja, ajustar según tolerancia, valorar EEG, Cpss y antecedentes",
+      "Solo usar en pacientes mayores",
+      "No monitorear niveles plasmáticos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Qué fármacos antiepilépticos pueden usarse en niños?",
+    opciones: [
+      "Solo lamotrigina y topiramato",
+      "Estiripentol, topiramato, vigabatrina, ganaloxona, felbamato, clobazam, levetiracetam, oxcarbazepina, etosuximida, lamotrigina",
+      "Todos los fármacos de adultos",
+      "Ninguno, solo benzodiacepinas"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Qué fármacos se pueden usar en el estado epiléptico?",
+    opciones: [
+      "Antidepresivos ISRS",
+      "Fenitoína parenteral, benzodiacepinas (diazepam, lorazepam, midazolam), fenobarbital, estiripentol",
+      "Corticoides e inhibidores de COX",
+      "Fármacos para Parkinson"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Tres fármacos antiepilépticos que pueden usarse en el embarazo?",
+    opciones: [
+      "Gabapentina, oxcarbazepina y clobazam",
+      "Lamotrigina, levetiracetam (seguros), gabapentina (categoría C, riesgo-beneficio)",
+      "Solo benzodiacepinas",
+      "Todos están contraindicados"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuándo debe suspenderse el tratamiento antiepiléptico?",
+    opciones: [
+      "Al finalizar un mes de tratamiento",
+      "Tras EEG normal, ausencia de crisis por 2–5 años, y evaluación del balance riesgo-beneficio",
+      "En cuanto aparezca un efecto adverso leve",
+      "Nunca debe suspenderse"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Por qué se prefiere usar lorazepam en lugar de diazepam en estado epiléptico?",
+    opciones: [
+      "Diazepam tiene efecto más prolongado",
+      "Lorazepam tiene menor redistribución, vida media más larga y efecto más sostenido",
+      "Diazepam no atraviesa la barrera hematoencefálica",
+      "Lorazepam es menos efectivo"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Presentaciones farmacológicas de los siguientes medicamentos?",
+    opciones: [
+      "Todos disponibles solo en tabletas",
+      "Fenobarbital (comprimidos, inyectable, solución oral), fenitoína (cápsulas, suspensión, inyectable), carbamazepina (tabletas, suspensión), valproato (comprimidos, jarabe, solución), diazepam (tabletas, inyectable, supositorios), topiramato (comprimidos, cápsulas), gabapentina (cápsulas, solución), etosuximida (cápsulas, solución oral)",
+      "Solo vía intravenosa",
+      "Ninguno se administra por vía oral"
+    ],
+    respuesta: 1
+  }  
+    ];
+    const preguntasEtanol = [
+    {
+    pregunta: "Explique en un máximo de 5 líneas el metabolismo hepático del etanol:",
+    opciones: [
+      "Se elimina sin cambios por orina y pulmón",
+      "ADH → acetaldehído → ALDH → ácido acético; NADH inhibe ciclo de Krebs, promueve lactato y lípidos",
+      "Se transforma en glucosa en hígado",
+      "No requiere metabolismo hepático"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los efectos tóxicos que se desarrollan después de la ingesta de metanol?",
+    opciones: [
+      "Cefalea leve, visión borrosa transitoria y recuperación espontánea",
+      "Dolor de cabeza, visión borrosa, acidosis metabólica grave, ceguera, depresión respiratoria",
+      "Hipotermia, vómitos y diarrea leve",
+      "Hepatitis, cirrosis y pancreatitis"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los signos de intoxicación aguda por etanol y su tratamiento?",
+    opciones: [
+      "Hipoglucemia, hipertensión, y tratamiento con esteroides",
+      "Mareo, incoordinación, agresividad, depresión respiratoria, coma; observación o soporte ventilatorio según gravedad",
+      "Vómito y fiebre; se trata con antibióticos",
+      "Dolor torácico, se maneja con aspirina"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Defina adicción, tolerancia y dependencia al etanol:",
+    opciones: [
+      "Adicción: uso crónico no compulsivo; tolerancia: menor respuesta; dependencia: solo síntomas físicos",
+      "Adicción: uso compulsivo con reforzamiento dopaminérgico; tolerancia: respuesta reducida; dependencia: necesidad de consumir para evitar abstinencia",
+      "Todas son sinónimos",
+      "Adicción es equivalente a hipersensibilidad"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Describa las acciones del etanol en el SNC:",
+    opciones: [
+      "Estimula todos los sistemas cerebrales",
+      "Produce hipervigilancia y euforia persistente",
+      "Depresor del SNC, ansiolítico, desinhibidor, intoxicación progresiva hasta coma por depresión respiratoria",
+      "Solo activa receptores GABA"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "Elabore un cuadro en donde la primera columna incluya el sistema u órgano afectado y las consecuencias en cada uno de ellos.",
+    opciones: [
+      "[Tabla – revisar por cuenta propia]",
+      "No aplica",
+      "No aplica",
+      "No aplica"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Con qué tipos de cáncer se relaciona la ingesta de etanol?",
+    opciones: [
+      "Solo cáncer hepático",
+      "Cáncer oral, laringe, faringe, esófago, colon, recto, mama, hígado",
+      "No se asocia a cáncer",
+      "Únicamente pulmonar"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿El diagnóstico del síndrome de alcoholismo fetal se basa en qué tríada?",
+    opciones: [
+      "Retraso mental, vómitos y dermatitis",
+      "Microcefalia, hepatitis y miopatía",
+      "Anormalidades craneofaciales, disfunción SNC, retraso en crecimiento",
+      "Solo bajo peso al nacer"
+    ],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cuáles son los usos clínicos del etanol?",
+    opciones: [
+      "Diurético y estimulante",
+      "Tratamiento de intoxicación por metanol/etilenglicol; inyecciones neurodestructivas para dolor intratable",
+      "Antidepresivo en pacientes psiquiátricos",
+      "Antibacteriano oral"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Con qué fármacos sufre interacciones el etanol?",
+    opciones: [
+      "Solo con antibióticos",
+      "Codeína, morfina, fenitoína, tolbutamida, warfarina, propranolol, benzodiacepinas",
+      "No tiene interacciones relevantes",
+      "Solo interactúa con anticonvulsivos"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Cuáles son los tres fármacos aprobados por la FDA para el tratamiento del AUD?",
+    opciones: [
+      "Diazepam, metadona y vareniciclina",
+      "Disulfiram, naltrexona y acamprosato",
+      "Naloxona, gabapentina y clonidina",
+      "Clorazepato, clozapina y topiramato"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Características más importantes de disulfiram, naltrexona y acamprosato?",
+    opciones: [
+      "Disulfiram inhibe ALDH (aversivo); naltrexona bloquea opioides (reduce craving); acamprosato modula glutamato (mantiene abstinencia)",
+      "Todos actúan sobre GABA",
+      "No tienen efectos adversos",
+      "Disulfiram es sedante; los otros solo se usan en abstinencia severa"
+    ],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cuáles son las dosis de los tres fármacos aprobados para AUD?",
+    opciones: [
+      "Disulfiram 100 mg, Naltrexona 25 mg, Acamprosato 500 mg",
+      "Disulfiram 500 mg/día, Naltrexona 50 mg/día, Acamprosato 666 mg 3 veces/día",
+      "Dosis únicas mensuales",
+      "No se conoce la dosis estándar"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "Otros fármacos utilizados en el tratamiento del AUD son:",
+    opciones: [
+      "Ibuprofeno y paracetamol",
+      "Vareniclina, baclofeno, nalmefeno, gabapentina",
+      "AINES e inhibidores de COX",
+      "ISRS y ATC"
+    ],
+    respuesta: 1
+  },
+  {
+    pregunta: "¿Diferentes grados de etanol en bebidas alcohólicas?",
+    opciones: [
+      "Todos contienen entre 2% y 5%",
+      "Whisky (40–62%), cerveza (4.5–12%), vino (2–15%), cognac (40%), tequila (35–55%), vodka (37.5–60%), ron (37–80%)",
+      "Solo el tequila tiene alto grado alcohólico",
+      "No contienen etanol real"
+    ],
+    respuesta: 1
+  }
+    ];
+
+    let puntaje = 0;
+    let respondidas = 0;
+
+    function actualizarPuntaje() {
+      document.getElementById("puntaje").textContent = `Puntaje: ${puntaje}`;
+    }
+
+    function actualizarProgreso(total) {
+      respondidas++;
+      const porcentaje = (respondidas / total) * 100;
+      document.getElementById("progreso").style.width = porcentaje + "%";
+    }
+
+    function registrarRespuesta(correcta) {
+  if (correcta) {
+    respuestasCorrectas++;
+    totalPreguntas++;
+  }
+  actualizarProgreso();
+}
+
+    function bloquearBotones(container) {
+      const botones = container.querySelectorAll("button");
+      botones.forEach(b => b.disabled = true);
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function cargarPreguntas(preguntas, contenedor) {
+      const total = preguntas.length;
+      preguntas.forEach((q, index) => {
+        const div = document.createElement("div");
+        div.className = "question-container";
+
+        const preguntaEl = document.createElement("p");
+        preguntaEl.textContent = `${index + 1}. ${q.pregunta}`;
+        div.appendChild(preguntaEl);
+
+        const opcionesDiv = document.createElement("div");
+        opcionesDiv.className = "button-grid";
+
+        const opciones = q.opciones.map((texto, idx) => ({ texto, idx }));
+        shuffle(opciones);
+
+        opciones.forEach(({ texto, idx }) => {
+          const btn = document.createElement("button");
+          btn.textContent = texto;
+          btn.onclick = () => {
+            if (btn.disabled) return;
+            if (idx === q.respuesta) {
+              btn.classList.add("correct");
+              btn.textContent += " ✅ ¡Correcto!";
+              puntaje++;
+              actualizarPuntaje();
+              bloquearBotones(opcionesDiv);
+              actualizarProgreso(total);
+            } else {
+              btn.classList.add("incorrect");
+              btn.textContent += " ❌ Intenta de nuevo.";
+              btn.disabled = true;
+            }
+          };
+          opcionesDiv.appendChild(btn);
+        });
+
+        div.appendChild(opcionesDiv);
+        contenedor.appendChild(div);
+      });
+    }
+
+    function mostrarSeccion(id) {
+      document.querySelectorAll('.quiz-section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    cargarPreguntas(preguntasAgonistas, document.getElementById("agonistas"));
+    cargarPreguntas(preguntasAntagonistas, document.getElementById("antagonistas"));
+    cargarPreguntas(preguntasOpioides1, document.getElementById("opioides1"));
+    cargarPreguntas(preguntasOpioides2, document.getElementById("opioides2"));
+    cargarPreguntas(preguntasAntidepresivos, document.getElementById("antidepresivos"));
+    cargarPreguntas(preguntasAntipsicoticos, document.getElementById("antipsicoticos"));
+    cargarPreguntas(preguntasAnestesiaG, document.getElementById("anestesiaG"));
+    cargarPreguntas(preguntasAnestesiaL, document.getElementById("anestesiaL"));
+    cargarPreguntas(preguntasAntiepilepticos, document.getElementById("antiepilepticos"));
+    cargarPreguntas(preguntasEtanol, document.getElementById("etanol"));
+
+    actualizarPuntaje();
+  </script>
+</body>
+</html>
