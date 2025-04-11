@@ -89,7 +89,6 @@
       <button onclick="mostrarSeccion('etanol')">Etanol</button>
     </div>
 
-    <!-- Contenedores de preguntas por tema -->
     <div id="agonistas" class="quiz-section" style="display:none;"></div>
     <div id="antagonistas" class="quiz-section" style="display:none;"></div>
     <div id="opioides1" class="quiz-section" style="display:none;"></div>
@@ -125,25 +124,110 @@
     respuesta: 2
   },
   {
-    pregunta: "Clasificación de simpaticomiméticos – ver figura 12-1 en el libro.",
-    opciones: [
-      "Revisar la tabla por cuenta propia",
-      "No aplica",
-      "No aplica",
-      "No aplica"
-    ],
-    respuesta: 0
-  },
-  {
-    pregunta: "Acciones en sistemas de órganos de la epinefrina – consultar cuadro clínico.",
-    opciones: [
-      "Revisar el cuadro por cuenta propia",
-      "No aplica",
-      "No aplica",
-      "No aplica"
-    ],
-    respuesta: 0
-  },
+  pregunta: `
+    <div style="font-size: 14.5px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; margin-bottom: 16px;">
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px;">
+        <div style="flex: 1;">Acción</div>
+        <div style="flex: 1;">Tipo</div>
+        <div style="flex: 2;">Fármaco(s)</div>
+        <div style="flex: 2;">Respuesta a reserpina / guanetidina</div>
+      </div>
+
+      <!-- Acción directa - selectivos -->
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Directa</div>
+        <div style="flex: 1;">Selectivos</div>
+        <div style="flex: 2;">A1: fenilefrina, A2: clonidina, B1: dobutamina, B2: terbutalina</div>
+        <div style="flex: 2;">No reducen, potencian</div>
+      </div>
+
+      <!-- Acción directa - no selectivos -->
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Directa</div>
+        <div style="flex: 1;">No selectivos</div>
+        <div style="flex: 2;">A1,A2: oximetazolina; B1,B2: isoproterenol; A1,A2,B1,B2: epinefrina; A1,A2,B1: norepinefrina</div>
+        <div style="flex: 2;">No reducen, potencian</div>
+      </div>
+
+      <!-- Acción mixta -->
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Mixta</div>
+        <div style="flex: 1;">—</div>
+        <div style="flex: 2;">Efedrina (A1, A2, B1, B2)</div>
+        <div style="flex: 2;">Reducen</div>
+      </div>
+
+      <!-- Acción indirecta - liberadores -->
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Indirecta</div>
+        <div style="flex: 1;">Liberadores</div>
+        <div style="flex: 2;">Anfetamina, tiramina</div>
+        <div style="flex: 2;">Reducen</div>
+      </div>
+
+      <!-- Acción indirecta - inhibidores de captación -->
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Indirecta</div>
+        <div style="flex: 1;">Inhib. captación</div>
+        <div style="flex: 2;">Cocaína</div>
+        <div style="flex: 2;">Anulan</div>
+      </div>
+
+      <!-- Acción indirecta - MAO y COMT -->
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Indirecta</div>
+        <div style="flex: 1;">MAO / COMT</div>
+        <div style="flex: 2;">Selegilina / Entacapona</div>
+        <div style="flex: 2;">—</div>
+      </div>
+    </div>
+  `
+},
+{
+  pregunta: `
+    <div style="font-size: 14.5px; border-radius: 8px; overflow: hidden; border: 1px solid #ccc; margin-bottom: 16px;">
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px;">
+        <div style="flex: 1;">Sistema</div>
+        <div style="flex: 3;">Efecto principal de la epinefrina</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Presión arterial</div>
+        <div style="flex: 3;">↑ Presión sistólica (β1), ↓ diastólica (vasodilatación muscular – β2)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Vasculares</div>
+        <div style="flex: 3;">Vasoconstricción en piel y vísceras (α1), vasodilatación muscular y cardíaca (β2)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Músculo liso</div>
+        <div style="flex: 3;">Relajación del tubo digestivo y útero (β2), contracción vesical y prostática (α1)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Respiratorio</div>
+        <div style="flex: 3;">Broncodilatación (β2), ↓ moco y congestión (α1)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">SNC</div>
+        <div style="flex: 3;">No cruza BHE, pero en altas dosis → ansiedad, insomnio, temblores</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Metabólico</div>
+        <div style="flex: 3;">↑ Glucogenólisis (β2), ↓ insulina (α2), ↑ glucosa y lipólisis (β3)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Otros</div>
+        <div style="flex: 3;">↑ Sudoración, midriasis (α1), ↑ contractilidad cardíaca (β1), temblores (β2)</div>
+      </div>
+    </div>
+  `
+},
   {
     pregunta: "¿Cuál de las siguientes presentaciones y usos corresponde a la epinefrina?",
     opciones: [
@@ -155,15 +239,45 @@
     respuesta: 1
   },
   {
-    pregunta: "¿Qué efecto produce la norepinefrina en el riñón?",
-    opciones: [
-      "Vasodilatación renal",
-      "Aumento del flujo glomerular",
-      "Disminución del flujo renal por vasoconstricción",
-      "Estimulación de la diuresis"
-    ],
-    respuesta: 2
-  },
+  pregunta: `
+    <div style="font-size: 14.5px; border-radius: 8px; overflow: hidden; border: 1px solid #ccc; margin-bottom: 16px;">
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px;">
+        <div style="flex: 1;">Órgano / Sistema</div>
+        <div style="flex: 3;">Acción del sistema simpático</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Sistema cardiovascular</div>
+        <div style="flex: 3;">↑ Presión arterial (vasoconstricción)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Corazón</div>
+        <div style="flex: 3;">↑ Contractilidad (efecto inotrópico)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Pulmones</div>
+        <div style="flex: 3;">Leve broncoconstricción</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Riñón</div>
+        <div style="flex: 3;">↓ Flujo renal (vasoconstricción)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Sistema digestivo</div>
+        <div style="flex: 3;">↓ Peristaltismo y flujo sanguíneo</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Sistema nervioso</div>
+        <div style="flex: 3;">↑ Estado de alerta</div>
+      </div>
+    </div>
+  `
+},
   {
     pregunta: "¿Cuál es la vía de administración de norepinefrina en el contexto clínico habitual?",
     opciones: [
@@ -265,15 +379,71 @@
     respuesta: 1
   },
   {
-    pregunta: "Usos terapéuticos de fármacos simpaticomiméticos – consultar tabla resumen.",
-    opciones: [
-      "Revisar el cuadro por cuenta propia",
-      "No aplica",
-      "No aplica",
-      "No aplica"
-    ],
-    respuesta: 0
-  }
+  pregunta: `
+    <div style="font-size: 14.5px; border-radius: 8px; overflow: hidden; border: 1px solid #ccc; margin-bottom: 16px;">
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px;">
+        <div style="flex: 1;">Fármaco</div>
+        <div style="flex: 3;">Usos terapéuticos</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Epinefrina</div>
+        <div style="flex: 3;">Choque anafiláctico, paro cardíaco, asma, prolongación de anestésicos locales</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Norepinefrina</div>
+        <div style="flex: 3;">Choque séptico, hipotensión grave</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Dopamina</div>
+        <div style="flex: 3;">Insuficiencia cardíaca, choque cardiogénico y séptico</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Dobutamina</div>
+        <div style="flex: 3;">Insuficiencia cardíaca aguda, shock cardiogénico</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Fenilefrina</div>
+        <div style="flex: 3;">Hipotensión, midriasis en exámenes oftalmológicos, descongestión nasal</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Clonidina</div>
+        <div style="flex: 3;">Hipertensión, abstinencia de opioides, ansiedad</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Brimonidina</div>
+        <div style="flex: 3;">Glaucoma, hipertensión ocular</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Salbutamol (albuterol)</div>
+        <div style="flex: 3;">Asma, EPOC</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Terbutalina</div>
+        <div style="flex: 3;">Asma, tocolítico en parto prematuro</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Efedrina</div>
+        <div style="flex: 3;">Descongestión nasal, hipotensión intraoperatoria</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Anfetamina</div>
+        <div style="flex: 3;">TDAH, narcolepsia, supresión del apetito (uso limitado)</div>
+      </div>
+    </div>
+  `
+}
+
 ];
     const preguntasAntagonistas = [{
     pregunta: "Describa las propiedades farmacológicas de los antagonistas adrenérgicos alfa 1:",
@@ -286,15 +456,65 @@
     respuesta: 1
   },
   {
-    pregunta: "Clasificación de los antagonistas de receptores adrenérgicos – ver figura 12-3.",
-    opciones: [
-      "Revisar la tabla por cuenta propia",
-      "No aplica",
-      "No aplica",
-      "No aplica"
-    ],
-    respuesta: 0
-  },
+  pregunta: `
+    <div style="font-size: 14.5px; border-radius: 8px; overflow: hidden; border: 1px solid #ccc; margin-bottom: 16px;">
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px;">
+        <div style="flex: 1;">Receptor</div>
+        <div style="flex: 1;">Tipo</div>
+        <div style="flex: 3;">Fármacos</div>
+      </div>
+
+      <!-- Antagonistas α -->
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">α</div>
+        <div style="flex: 1;">No selectivo</div>
+        <div style="flex: 3;">Fenoxibenzamina, fentolamina</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">α<sub>1</sub></div>
+        <div style="flex: 1;">Selectivo</div>
+        <div style="flex: 3;">Prazosina, terazosina, doxazosina, alfuzosina, tamsulosina, indoramina, urapidilo, bunazosina</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">α<sub>2</sub></div>
+        <div style="flex: 1;">Selectivo</div>
+        <div style="flex: 3;">Yohimbina</div>
+      </div>
+
+      <!-- Antagonistas β -->
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">β</div>
+        <div style="flex: 1;">No selectivo (1ª gen.)</div>
+        <div style="flex: 3;">Nadolol, penbutolol, pindolol, propranolol, timolol, sotalol, levobunolol, metipranolol</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">β<sub>1</sub></div>
+        <div style="flex: 1;">Selectivo (2ª gen.)</div>
+        <div style="flex: 3;">Acebutolol, atenolol, bisoprolol, esmolol, metoprolol</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">β (α + β)</div>
+        <div style="flex: 1;">No selectivo (3ª gen.)</div>
+        <div style="flex: 3;">Carteolol, carvedilol, bucindolol, labetalol</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">β<sub>1</sub></div>
+        <div style="flex: 1;">Selectivo (3ª gen.)</div>
+        <div style="flex: 3;">Betaxolol, celiprolol, nebivolol</div>
+      </div>
+
+      <!-- Nota -->
+      <div style="padding: 10px; background-color: #fff3cd; border-top: 1px solid #ccc; font-size: 13.5px;">
+        <strong>Nota:</strong> Carvedilol y labetalol también bloquean los receptores α<sub>1</sub>.
+      </div>
+    </div>
+  `
+},
   {
     pregunta: "Escriba las características más importantes de la prazosina, terazocina y doxazosina:",
     opciones: [
@@ -376,15 +596,94 @@
     respuesta: 0
   },
   {
-    pregunta: "Cuadro clínico: nombre del fármaco, presentación farmacológica, dosis y usos terapéuticos – ver ítem 11.",
-    opciones: [
-      "Revisar el cuadro por cuenta propia",
-      "No aplica",
-      "No aplica",
-      "No aplica"
-    ],
-    respuesta: 0
-  },
+  pregunta: `
+    <div style="font-size: 14.3px; border-radius: 8px; overflow-x: auto; border: 1px solid #ccc; margin-bottom: 16px;">
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px;">
+        <div style="flex: 1;">Fármaco</div>
+        <div style="flex: 2;">Presentación</div>
+        <div style="flex: 2;">Dosis habitual</div>
+        <div style="flex: 2;">Usos principales</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Propranolol</div>
+        <div style="flex: 2;">Tabletas, IV</div>
+        <div style="flex: 2;">40–80 mg/día; IV 1–3 mg</div>
+        <div style="flex: 2;">HTA, angina, arritmias bajo anestesia</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Metoprolol</div>
+        <div style="flex: 2;">Tabletas, liberación prolongada, IV</div>
+        <div style="flex: 2;">100 mg/día en 1–2 tomas</div>
+        <div style="flex: 2;">HTA, angina, IC, post-infarto</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Atenolol</div>
+        <div style="flex: 2;">Tabletas (25–100 mg)</div>
+        <div style="flex: 2;">50 mg/día</div>
+        <div style="flex: 2;">HTA, angina, post-infarto</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Esmolol</div>
+        <div style="flex: 2;">Inyectable</div>
+        <div style="flex: 2;">500 µg/kg carga + infusión</div>
+        <div style="flex: 2;">Crisis HTA, taquicardia, cirugía</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Acebutolol</div>
+        <div style="flex: 2;">Cápsulas (100–400 mg)</div>
+        <div style="flex: 2;">200 mg 2x/día</div>
+        <div style="flex: 2;">HTA, arritmias, post-infarto</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Bisoprolol</div>
+        <div style="flex: 2;">Tabletas (2.5–10 mg)</div>
+        <div style="flex: 2;">5 mg/día</div>
+        <div style="flex: 2;">HTA, IC (con IECA/diuréticos)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Labetalol</div>
+        <div style="flex: 2;">Comprimidos, solución inyectable, suspensión oral</div>
+        <div style="flex: 2;">1–3 mg/kg dividida</div>
+        <div style="flex: 2;">HTA grave, IC moderada a severa</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Carvedilol</div>
+        <div style="flex: 2;">Comprimidos (3.125–25 mg)</div>
+        <div style="flex: 2;">25 mg/día</div>
+        <div style="flex: 2;">Insuficiencia cardíaca</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Celiprolol</div>
+        <div style="flex: 2;">Comprimidos (200 mg)</div>
+        <div style="flex: 2;">200–400 mg/día</div>
+        <div style="flex: 2;">HTA, angina</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1;">Nebivolol</div>
+        <div style="flex: 2;">Tabletas (2.5–20 mg)</div>
+        <div style="flex: 2;">5–10 mg/día</div>
+        <div style="flex: 2;">HTA, IC con beneficio en remodelado</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1;">Bucindolol</div>
+        <div style="flex: 2;">Tabletas (50–100 mg)</div>
+        <div style="flex: 2;">50 mg 2x/día</div>
+        <div style="flex: 2;">HTA, IC, FA</div>
+      </div>
+    </div>
+  `
+},
   {
     pregunta: "Escriba los efectos adversos y contraindicaciones de los fármacos anteriores:",
     opciones: [
@@ -819,25 +1118,101 @@
     respuesta: 2
   },
   {
-    pregunta: "Elabore un cuadro con grupo farmacológico, fármacos representantes, aspectos importantes y efectos adversos.",
-    opciones: [
-      "[Tabla – revisar por cuenta propia]",
-      "No aplica",
-      "No aplica",
-      "No aplica"
-    ],
-    respuesta: 0
-  },
-  {
-    pregunta: "¿Cuáles son algunas interacciones farmacológicas importantes de los antidepresivos?",
-    opciones: [
-      "Todos los antidepresivos potencian la insulina y causan hipoglucemia",
-      "Solo los ISRS tienen interacciones; el resto son seguros",
-      "Muchos antidepresivos afectan enzimas del citocromo P450 y pueden causar síndrome serotoninérgico si se combinan con IMAO o drogas serotoninérgicas",
-      "Los antidepresivos solo interactúan con alcohol y cafeína"
-    ],
-    respuesta: 2
-  },
+  pregunta: `
+    <div style="font-size: 14.3px; border-radius: 8px; overflow-x: auto; border: 1px solid #ccc; margin-bottom: 16px;">
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px;">
+        <div style="flex: 1.3;">Grupo farmacológico</div>
+        <div style="flex: 1.5;">Fármacos</div>
+        <div style="flex: 2.5;">Usos / Mecanismo</div>
+        <div style="flex: 1.8;">Efectos adversos</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.3;">ISRS</div>
+        <div style="flex: 1.5;">Fluoxetina, Sertralina, Paroxetina, Citalopram, Escitalopram</div>
+        <div style="flex: 2.5;">Inhiben recaptación de serotonina. Usados en depresión, ansiedad y TOC</div>
+        <div style="flex: 1.8;">Náuseas, insomnio, disfunción sexual, ↑ peso</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.3;">IRSN</div>
+        <div style="flex: 1.5;">Venlafaxina, Duloxetina, Milnaciprán, Levomilnaciprán</div>
+        <div style="flex: 2.5;">Inhiben recaptación de serotonina y noradrenalina. Eficaces en depresión y ansiedad</div>
+        <div style="flex: 1.8;">Náuseas, insomnio, disfunción sexual, ↑ PA (venlafaxina)</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.3;">Tricíclicos</div>
+        <div style="flex: 1.5;">Amitriptilina, Imipramina, Nortriptilina, Clomipramina</div>
+        <div style="flex: 2.5;">Inhiben recaptación de serotonina y NA. También afectan otros neurotransmisores</div>
+        <div style="flex: 1.8;">Efectos anticolinérgicos, ↑ peso, arritmias, sedación</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.3;">Ansiolíticos</div>
+        <div style="flex: 1.5;">Diazepam, Lorazepam, Alprazolam, Clonazepam</div>
+        <div style="flex: 2.5;">Potencian GABA. Útiles en ansiedad y crisis</div>
+        <div style="flex: 1.8;">Sedación, ↓ memoria, ↓ alerta</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.3;">Buspirona</div>
+        <div style="flex: 1.5;">Buspirona</div>
+        <div style="flex: 2.5;">Actúa sobre 5-HT1A y D2. Para ansiedad</div>
+        <div style="flex: 1.8;">Mareos, náuseas, somnolencia</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.3;">IMAO</div>
+        <div style="flex: 1.5;">Isocarboxazida, Fenelzina, Selegilina, Tranilcipromina</div>
+        <div style="flex: 2.5;">Inhiben la enzima MAO. ↑ serotonina, dopamina y NA</div>
+        <div style="flex: 1.8;">Crisis hipertensiva (con tiramina), síndrome serotoninérgico</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.3;">Atípicos</div>
+        <div style="flex: 1.5;">Bupropión, Mirtazapina, Trazodona</div>
+        <div style="flex: 2.5;">Modulan dopamina y serotonina. Usados en depresión y ansiedad</div>
+        <div style="flex: 1.8;">Sedación, ↑ peso, náuseas, insomnio</div>
+      </div>
+    </div>
+  `
+},
+{
+  pregunta: `
+    <div style="background-color: #f9f9f9; padding: 16px; border-left: 5px solid #3f51b5; border-radius: 8px; font-size: 14.5px; line-height: 1.6;">
+      <h3 style="margin-top: 0;">Interacciones farmacológicas relevantes por grupo</h3>
+
+      <strong>🔹 ISRS (Inhibidores Selectivos de la Recaptación de Serotonina):</strong>
+      <ul>
+        <li>Paroxetina y fluoxetina inhiben <strong>CYP2D6</strong> → ↑ concentración de otros fármacos.</li>
+        <li>Fluvoxamina inhibe <strong>CYP1A2 y CYP2C19</strong>; fluoxetina también <strong>CYP3A4</strong>.</li>
+        <li>↑ riesgo de <strong>síndrome serotoninérgico</strong> con IMAO o drogas serotoninérgicas (MDMA, etc.).</li>
+        <li>Potencian efectos de antidepresivos tricíclicos si se usan juntos.</li>
+      </ul>
+
+      <strong>🔹 IRSN (Inhibidores de la Recaptación de Serotonina y Noradrenalina):</strong>
+      <ul>
+        <li>Interaccionan con IMAO y antagonistas serotoninérgicos.</li>
+        <li>Trazodona inhibe <strong>CYP3A4</strong>; mirtazapina usa <strong>CYP2D6, 1A2 y 3A4</strong>.</li>
+        <li>No combinar con IMAO → riesgo de toxicidad serotoninérgica.</li>
+      </ul>
+
+      <strong>🔹 Bupropión:</strong>
+      <ul>
+        <li>Se metaboliza por <strong>CYP2B6</strong>, pero <strong>inhibe CYP2D6</strong>.</li>
+        <li>Puede ↑ niveles de ISRS o causar efectos adversos si no se ajusta dosis.</li>
+      </ul>
+
+      <strong>🔹 IMAO (Inhibidores de Monoaminooxidasa):</strong>
+      <ul>
+        <li>Interacciones severas con ISRS e IRSN (fluoxetina, sertralina, venlafaxina).</li>
+        <li><strong>Evitar alimentos ricos en tiramina</strong> (quesos curados, embutidos, etc.) → crisis hipertensiva.</li>
+        <li><strong>Evitar simpaticomiméticos</strong> (pseudoefedrina, fenilefrina, etc.) por ↑ presión arterial.</li>
+      </ul>
+    </div>
+  `
+},
   {
     pregunta: "¿Qué fármacos se utilizan para tratar la ansiedad?",
     opciones: [
@@ -1040,15 +1415,64 @@
     respuesta: 1
   },
   {
-    pregunta: "Cuáles son las interacciones medicamentosas y efectos adversos del litio:",
-    opciones: [
-      "No tiene interacciones ni efectos relevantes",
-      "Interactúa con diuréticos, AINES, IECAs; puede causar temblor, ataxia, hipotiroidismo, poliuria, arritmias, teratogenicidad",
-      "Solo interacciona con anticonvulsivos",
-      "Es seguro en el embarazo y la lactancia"
-    ],
-    respuesta: 1
-  }
+  pregunta: `
+    <div style="font-size: 14.3px; border-radius: 8px; overflow-x: auto; border: 1px solid #ccc; margin-bottom: 16px; padding: 12px; background-color: #f9f9f9;">
+      <h3 style="margin-top: 0;">¿Cuáles son las interacciones medicamentosas y los efectos adversos del litio?</h3>
+
+      <strong>🔹 Interacciones medicamentosas (↑ toxicidad):</strong>
+      <ul style="margin-top: 4px; padding-left: 20px;">
+        <li>Diuréticos tiazídicos</li>
+        <li>Diuréticos ahorradores de potasio</li>
+        <li>Diuréticos de asa (furosemida)</li>
+        <li>Diuréticos osmóticos o acetazolamida</li>
+        <li>AINEs</li>
+        <li>IECA</li>
+      </ul>
+
+      <strong>🔹 Efectos adversos (por sistema):</strong>
+
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px; margin-top: 10px;">
+        <div style="flex: 1.3;">Sistema</div>
+        <div style="flex: 3;">Efectos adversos</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.3;">SNC</div>
+        <div style="flex: 3;">Temblor fino, ataxia, embotamiento, fatiga, aumento de peso</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.3;">Renal</div>
+        <div style="flex: 3;">↓ Capacidad de concentración urinaria → poliuria, polidipsia</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.3;">Tiroides</div>
+        <div style="flex: 3;">Bocio, hipotiroidismo, hiperparatiroidismo con hipercalcemia</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.3;">Piel</div>
+        <div style="flex: 3;">Alergias: dermatitis, foliculitis, vasculitis, alopecia</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.3;">ECG</div>
+        <div style="flex: 3;">Bradicardia, bloqueo AV, aplanamiento de onda T</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.3;">Embarazo</div>
+        <div style="flex: 3;">Malformaciones CV (Ebstein), hipotonía, soplo cardíaco</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.3;">Otros</div>
+        <div style="flex: 3;">Leucocitosis benigna, sabor metálico</div>
+      </div>
+    </div>
+  `
+}
 ];
     const preguntasAnestesiaG = [{
     pregunta: "La administración de anestesia general persigue tres objetivos generales:",
@@ -1746,15 +2170,77 @@
     respuesta: 2
   },
   {
-    pregunta: "Elabore un cuadro en donde la primera columna incluya el sistema u órgano afectado y las consecuencias en cada uno de ellos.",
-    opciones: [
-      "[Tabla – revisar por cuenta propia]",
-      "No aplica",
-      "No aplica",
-      "No aplica"
-    ],
-    respuesta: 0
-  },
+  pregunta: `
+    <div style="font-size: 14.3px; border-radius: 8px; overflow-x: auto; border: 1px solid #ccc; margin-bottom: 16px; padding: 12px; background-color: #f9f9f9;">
+      <h3 style="margin-top: 0;">¿Cuáles son los principales efectos adversos del consumo crónico de etanol por sistema?</h3>
+
+      <div style="display: flex; font-weight: bold; background-color: #e0e0e0; padding: 8px; margin-top: 10px;">
+        <div style="flex: 1.2;">Sistema</div>
+        <div style="flex: 3;">Efectos</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.2;">Óseo</div>
+        <div style="flex: 3;">↓ masa ósea, alteración vitamina D, ↑ paratohormona, ↓ testosterona</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.2;">Cardiovascular</div>
+        <div style="flex: 3;">Relación compleja con enfermedad coronaria, ↑ riesgo de IHD en AUD</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.2;">Pulmonar</div>
+        <div style="flex: 3;">Daño oxidativo, ↑ riesgo de neumonía y SDR agudo</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.2;">Músculo esquelético</div>
+        <div style="flex: 3;">↓ masa muscular, miopatía, ↓ glucógeno y enzimas musculares</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.2;">Gastrointestinal</div>
+        <div style="flex: 3;">Alteración de motilidad, secreción, absorción y barrera intestinal</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.2;">Esófago</div>
+        <div style="flex: 3;">Riesgo de reflujo, cáncer, rupturas y ↓ peristalsis</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.2;">Estómago</div>
+        <div style="flex: 3;">Gastritis aguda/crónica, ↓ motilidad, dolor epigástrico postconsumo</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.2;">Intestino</div>
+        <div style="flex: 3;">Diarrea, fisuras, atrofia de vellosidades, ↓ enzimas digestivas</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.2;">Páncreas</div>
+        <div style="flex: 3;">Causa común de pancreatitis, hiperglucemia</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.2;">Hígado</div>
+        <div style="flex: 3;">Esteatosis hepática, hepatitis alcohólica, cirrosis</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #ffffff;">
+        <div style="flex: 1.2;">Neuroinmunidad</div>
+        <div style="flex: 3;">↑ LPS, intestino permeable, citocinas proinflamatorias, apoptosis neuronal</div>
+      </div>
+
+      <div style="display: flex; padding: 6px; background-color: #f9f9f9;">
+        <div style="flex: 1.2;">Sistema nervioso central</div>
+        <div style="flex: 3;">Depresión del SNC, alteraciones conductuales, deterioro cognitivo</div>
+      </div>
+    </div>
+  `
+},
   {
     pregunta: "¿Con qué tipos de cáncer se relaciona la ingesta de etanol?",
     opciones: [
@@ -1881,46 +2367,57 @@
     }
 
     function cargarPreguntas(preguntas, contenedor) {
-      const total = preguntas.length;
-      preguntas.forEach((q, index) => {
-        const div = document.createElement("div");
-        div.className = "question-container";
+  const total = preguntas.filter(p => p.opciones).length;
 
-        const preguntaEl = document.createElement("p");
-        preguntaEl.textContent = `${index + 1}. ${q.pregunta}`;
-        div.appendChild(preguntaEl);
+  preguntas.forEach((q, index) => {
+    const div = document.createElement("div");
+    div.className = "question-container";
 
-        const opcionesDiv = document.createElement("div");
-        opcionesDiv.className = "button-grid";
+    const preguntaEl = document.createElement("p");
 
-        const opciones = q.opciones.map((texto, idx) => ({ texto, idx }));
-        shuffle(opciones);
-
-        opciones.forEach(({ texto, idx }) => {
-          const btn = document.createElement("button");
-          btn.textContent = texto;
-          btn.onclick = () => {
-            if (btn.disabled) return;
-            if (idx === q.respuesta) {
-              btn.classList.add("correct");
-              btn.textContent += " ✅ ¡Correcto!";
-              puntaje++;
-              actualizarPuntaje();
-              bloquearBotones(opcionesDiv);
-              actualizarProgreso(total);
-            } else {
-              btn.classList.add("incorrect");
-              btn.textContent += " ❌ Intenta de nuevo.";
-              btn.disabled = true;
-            }
-          };
-          opcionesDiv.appendChild(btn);
-        });
-
-        div.appendChild(opcionesDiv);
-        contenedor.appendChild(div);
-      });
+    // 🔸 Si no hay opciones, solo mostrar el texto como contenido enriquecido
+    if (!q.opciones) {
+      preguntaEl.innerHTML = `${index + 1}. ${q.pregunta}`;
+      div.appendChild(preguntaEl);
+      contenedor.appendChild(div);
+      return;
     }
+
+    // 🔸 Si hay opciones, continuar normal
+    preguntaEl.textContent = `${index + 1}. ${q.pregunta}`;
+    div.appendChild(preguntaEl);
+
+    const opcionesDiv = document.createElement("div");
+    opcionesDiv.className = "button-grid";
+
+    const opciones = q.opciones.map((texto, idx) => ({ texto, idx }));
+    shuffle(opciones);
+
+    opciones.forEach(({ texto, idx }) => {
+      const btn = document.createElement("button");
+      btn.textContent = texto;
+      btn.onclick = () => {
+        if (btn.disabled) return;
+        if (idx === q.respuesta) {
+          btn.classList.add("correct");
+          btn.textContent += " ✅ ¡Correcto!";
+          puntaje++;
+          actualizarPuntaje();
+          bloquearBotones(opcionesDiv);
+          actualizarProgreso(total);
+        } else {
+          btn.classList.add("incorrect");
+          btn.textContent += " ❌ Intenta de nuevo.";
+          btn.disabled = true;
+        }
+      };
+      opcionesDiv.appendChild(btn);
+    });
+
+    div.appendChild(opcionesDiv);
+    contenedor.appendChild(div);
+  });
+}
 
     function mostrarSeccion(id) {
       document.querySelectorAll('.quiz-section').forEach(sec => sec.style.display = 'none');
